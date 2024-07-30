@@ -3,14 +3,14 @@ const hexCode = document.querySelector(".hex");
 const rgbCode = document.querySelector(".rgb");
 const refreshColorBtn = document.getElementById("refresh-color");
 
-function generateRandomNum(max) {
-  return Math.floor(Math.random() * (max + 1));
+function generateRandomNum(min, max) {
+  return Math.floor(Math.random() * (max + 1 - min)) + min;
 }
 
 function generateRgbColor() {
-  const r = generateRandomNum(255);
-  const g = generateRandomNum(255);
-  const b = generateRandomNum(255);
+  const r = generateRandomNum(0, 255);
+  const g = generateRandomNum(0, 255);
+  const b = generateRandomNum(0, 255);
   return [r, g, b];
 }
 
@@ -32,7 +32,40 @@ function setColor() {
   colorExample.style.backgroundColor = hexColor;
   rgbCode.textContent = `rgb(${r}, ${g}, ${b})`;
   hexCode.textContent = hexColor;
+  const brightness = 0.21 * r + 0.72 * g + 0.07 * b;
+  if (brightness < 80) {
+    colorExample.style.textShadow = "1px 1px 2px white";
+  } else {
+    colorExample.style.textShadow = "";
+  }
 }
 
 setColor();
-refreshColorBtn.addEventListener("click", setColor);
+
+refreshColorBtn.onclick = function () {
+  setColor();
+  const minRadius = 20;
+  const maxRadius = 80;
+  colorExample.style.borderTopLeftRadius =
+    generateRandomNum(minRadius, maxRadius) +
+    "% " +
+    generateRandomNum(minRadius, maxRadius) +
+    "%";
+  colorExample.style.borderTopRightRadius =
+    generateRandomNum(minRadius, maxRadius) +
+    "% " +
+    generateRandomNum(minRadius, maxRadius) +
+    "%";
+  colorExample.style.borderBottomRightRadiu =
+    generateRandomNum(minRadius, maxRadius) +
+    "% " +
+    generateRandomNum(minRadius, maxRadius) +
+    "%";
+  colorExample.style.borderBottomLeftRadius =
+    generateRandomNum(minRadius, maxRadius) +
+    "% " +
+    generateRandomNum(minRadius, maxRadius) +
+    "%";
+  colorExample.style.width = generateRandomNum(300, 600) + "px";
+  colorExample.style.height = generateRandomNum(350, 600) + "px";
+};

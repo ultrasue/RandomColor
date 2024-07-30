@@ -24,7 +24,7 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  row-gap: 30px;  
+  row-gap: 30px;
 }
 
 #color-example {
@@ -57,6 +57,6 @@ body {
 }
 
 #refresh-color:hover {
-  box-shadow: 0 0 10px #5c6b9950;
-  transition: 0.7s;
+  box-shadow: 1px 2px 7px #ffffff8d;
+  transition: 0.5s;
 }
